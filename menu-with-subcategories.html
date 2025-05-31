@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню с автоматическим сворачиванием</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .menu {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .category {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .category:hover {
+            background: #f1f8ff;
+            color: #1976d2;
+        }
+        
+        .subcategories {
+            display: none;
+            padding-left: 20px;
+            background: #f8fafc;
+            border-left: 3px solid #1976d2;
+        }
+        
+        .subcategory {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eef2f7;
+            transition: all 0.2s ease;
+        }
+        
+        .subcategory:hover {
+            background: #e3f2fd;
+            padding-left: 20px;
+        }
+        
+        .subcategory a {
+            text-decoration: none;
+            color: #455a64;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .subcategory:hover a {
+            color: #1976d2;
+        }
+        
+        .category.active {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .category.active .arrow {
+            transform: rotate(90deg);
+            color: #1976d2;
+        }
+        
+        .arrow {
+            transition: transform 0.3s ease;
+            color: #78909c;
+            font-size: 18px;
+        }
+        
+        .category-icon {
+            margin-right: 10px;
+            color: #78909c;
+        }
+        
+        .category.active .category-icon {
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Меню с автоматическим сворачиванием</h1>
+        
+        <div class="menu">
+            <!-- Категория 1 с подкатегориями -->
+            <div class="category" onclick="toggleCategory(this)">
+                <div>
+                    <span class="category-icon">📁</span>
+                    Категория 1
+                </div>
+                <span class="arrow">›</span>
+            </div>
+            <div class="subcategories">
+                <div class="subcategory">
+                    <a href="#subcategory1-1">Подкатегория 1 Категории 1</a>
+                </div>
+                <div class="subcategory">
+                    <a href="#subcategory1-2">Подкатегория 2 Категории 1</a>
+                </div>
+            </div>
+            
+            <!-- Категория 2 с подкатегориями -->
+            <div class="category" onclick="toggleCategory(this)">
+                <div>
+                    <span class="category-icon">📁</span>
+                    Категория 2
+                </div>
+                <span class="arrow">›</span>
+            </div>
+            <div class="subcategories">
+                <div class="subcategory">
+                    <a href="#subcategory2-1">Подкатегория 1 Категории 2</a>
+                </div>
+                <div class="subcategory">
+                    <a href="#subcategory2-2">Подкатегория 2 Категории 2</a>
+                </div>
+            </div>
+            
+            <!-- Категория 3 с подкатегориями -->
+            <div class="category" onclick="toggleCategory(this)">
+                <div>
+                    <span class="category-icon">📁</span>
+                    Категория 3
+                </div>
+                <span class="arrow">›</span>
+            </div>
+            <div class="subcategories">
+                <div class="subcategory">
+                    <a href="#subcategory3-1">Подкатегория 1 Категории 3</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Демонстрационный контент -->
+        <div style="margin-top: 50px; padding: 20px; background: white; border-radius: 10px;">
+            <h2 id="subcategory1-1">Подкатегория 1 Категории 1</h2>
+            <p>Содержимое первой подкатегории первой категории.</p>
+            
+            <h2 id="subcategory1-2">Подкатегория 2 Категории 1</h2>
+            <p>Содержимое второй подкатегории первой категории.</p>
+            
+            <h2 id="subcategory2-1">Подкатегория 1 Категории 2</h2>
+            <p>Содержимое первой подкатегории второй категории.</p>
+            
+            <h2 id="subcategory2-2">Подкатегория 2 Категории 2</h2>
+            <p>Содержимое второй подкатегории второй категории.</p>
+            
+            <h2 id="subcategory3-1">Подкатегория 1 Категории 3</h2>
+            <p>Содержимое первой подкатегории третьей категории.</p>
+        </div>
+    </div>
+    
+    <script>
+        function toggleCategory(clickedCategory) {
+            // Сначала закрываем все категории
+            const allCategories = document.querySelectorAll('.category');
+            const allSubcategories = document.querySelectorAll('.subcategories');
+            
+            allCategories.forEach(category => {
+                if (category !== clickedCategory) {
+                    category.classList.remove('active');
+                }
+            });
+            
+            allSubcategories.forEach(sub => {
+                if (sub !== clickedCategory.nextElementSibling) {
+                    sub.style.display = 'none';
+                }
+            });
+            
+            // Затем переключаем текущую категорию
+            clickedCategory.classList.toggle('active');
+            const subcategories = clickedCategory.nextElementSibling;
+            
+            if (clickedCategory.classList.contains('active')) {
+                subcategories.style.display = 'block';
+            } else {
+                subcategories.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
