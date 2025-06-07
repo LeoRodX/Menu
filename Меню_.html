@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мятное меню</title>
+    <style>
+        :root {
+            --mint-primary: #88D8C0;
+            --mint-dark: #5BBF9D;
+            --mint-darker: #3A9D7D;
+            --text-dark: #2C3E50;
+            --text-light: #F5F7FA;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #F5F7FA;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+        
+        .menu-primary {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu-item {
+            position: relative;
+        }
+        
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-link:hover {
+            background-color: var(--mint-primary);
+            color: white;
+        }
+        
+        .menu-link.active {
+            background-color: var(--mint-dark);
+            color: white;
+        }
+        
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 220px;
+            background-color: white;
+            box-shadow: var(--shadow);
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .menu-item:hover .submenu,
+        .submenu:hover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .submenu-item {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .submenu-link {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .submenu-link:hover {
+            background-color: var(--mint-primary);
+            color: white;
+            padding-left: 25px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--mint-darker);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .content {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: var(--mint-darker);
+            margin-bottom: 20px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--mint-darker);
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .menu-primary {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: stretch;
+                box-shadow: var(--shadow);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            
+            .menu-primary.active {
+                max-height: 1000px;
+            }
+            
+            .menu-item {
+                width: 100%;
+            }
+            
+            .menu-link {
+                padding: 15px 20px;
+                height: auto;
+            }
+            
+            .submenu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                background-color: #f9f9f9;
+            }
+            
+            .menu-item:hover .submenu,
+            .submenu:hover {
+                max-height: 500px;
+            }
+            
+            .submenu-link {
+                padding-left: 40px;
+            }
+            
+            .submenu-link:hover {
+                padding-left: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="menu">
+                <a href="#" class="logo">
+                    <span class="logo-icon">🌿</span>
+                    <span>Мятный дизайн</span>
+                </a>
+                
+                <button class="mobile-menu-btn">☰</button>
+                
+                <ul class="menu-primary">
+                    <li class="menu-item">
+                        <a href="#" class="menu-link active">Главная</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">Продукты</a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Веб-приложения</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Мобильные приложения</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">UI/UX дизайн</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">Услуги</a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Разработка</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Консалтинг</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Поддержка</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">О компании</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">Контакты</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="content">
+            <h1>Современное мятное меню</h1>
+            <p>Демонстрация двухуровневого плоского меню в приятной мятной цветовой гамме</p>
+            <p>Наведите курсор на пункты "Продукты" или "Услуги", чтобы увидеть подменю</p>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const menuPrimary = document.querySelector('.menu-primary');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                menuPrimary.classList.toggle('active');
+            });
+            
+            // Закрываем меню при клике на пункт (для мобильной версии)
+            const menuLinks = document.querySelectorAll('.menu-link');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        // Для пунктов с подменю предотвращаем закрытие
+                        if (!this.nextElementSibling || !this.nextElementSibling.classList.contains('submenu')) {
+                            menuPrimary.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            // Обработка подменю на мобильных устройствах
+            const submenuLinks = document.querySelectorAll('.submenu-link');
+            submenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        menuPrimary.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

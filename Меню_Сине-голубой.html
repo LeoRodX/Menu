@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демонстратор меню</title>
+    <style>
+        :root {
+            --primary-color: #5b8cff;
+            --primary-light: #e6eeff;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        .main-menu {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .menu-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .menu-link.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 220px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .menu-item:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-item .submenu-link {
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .submenu-item:last-child .submenu-link {
+            border-bottom: none;
+        }
+
+        .submenu-item .submenu-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            padding-left: 25px;
+        }
+
+        .content {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .main-menu {
+                flex-direction: column;
+            }
+
+            .submenu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                margin-top: 5px;
+                background-color: var(--light-gray);
+            }
+
+            .menu-item:hover .submenu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Логотип</div>
+            <nav class="menu-container">
+                <ul class="main-menu">
+                    <li class="menu-item">
+                        <a href="#" class="menu-link active">Главная</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">Продукты</a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Веб-приложения</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Мобильные приложения</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Дизайн услуги</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">Решения</a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Для бизнеса</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Для образования</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">О компании</a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Наша команда</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">История</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="submenu-link">Вакансии</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">Контакты</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="content">
+            <h1>Добро пожаловать в демонстратор меню</h1>
+            <p>Это пример современного, приятного глазу двухуровневого меню в светлых тонах с плавными анимациями.</p>
+            <p>Наведите курсор на пункты меню "Продукты", "Решения" или "О компании", чтобы увидеть подменю.</p>
+            <p>Меню адаптировано для мобильных устройств - на маленьких экранах подменю открывается по клику.</p>
+        </div>
+    </div>
+
+    <script>
+        // Добавляем обработчик для мобильных устройств
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            // Проверяем ширину экрана
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+            
+            // Обработчик клика для мобильных устройств
+            if (isMobile()) {
+                menuItems.forEach(item => {
+                    const link = item.querySelector('.menu-link');
+                    const submenu = item.querySelector('.submenu');
+                    
+                    if (submenu) {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const isOpen = submenu.style.display === 'block';
+                            
+                            // Закрываем все подменю
+                            document.querySelectorAll('.submenu').forEach(sm => {
+                                sm.style.display = 'none';
+                            });
+                            
+                            // Открываем текущее, если оно было закрыто
+                            if (!isOpen) {
+                                submenu.style.display = 'block';
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Подсветка активного пункта меню
+            const menuLinks = document.querySelectorAll('.menu-link, .submenu-link');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Удаляем активный класс у всех ссылок
+                    menuLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

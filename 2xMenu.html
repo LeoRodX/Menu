@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демонстратор двухуровневого меню</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --hover-color: #4fc3f7;
+            --text-color: #333;
+            --light-text: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .menu > li {
+            position: relative;
+        }
+
+        .menu > li > a {
+            color: var(--light-text);
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            display: block;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .menu > li > a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .menu > li:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            width: 220px;
+            border-radius: 0 0 4px 4px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1000;
+            list-style: none;
+        }
+
+        .submenu li a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            display: block;
+            transition: var(--transition);
+            border-bottom: 1px solid #eee;
+        }
+
+        .submenu li:last-child a {
+            border-bottom: none;
+        }
+
+        .submenu li a:hover {
+            background-color: var(--hover-color);
+            color: var(--light-text);
+            padding-left: 1.5rem;
+        }
+
+        .submenu li a i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .content {
+            background-color: white;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--secondary-color);
+                flex-direction: column;
+                align-items: stretch;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .menu.active {
+                max-height: 500px;
+            }
+
+            .menu > li {
+                width: 100%;
+            }
+
+            .menu > li > a {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .submenu {
+                position: static;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .menu > li:hover .submenu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Меню Демо</div>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="menu">
+                <li>
+                    <a href="#">Главная</a>
+                </li>
+                <li>
+                    <a href="#">Продукты</a>
+                    <ul class="submenu">
+                        <li><a href="#"><i>📱</i> Смартфоны</a></li>
+                        <li><a href="#"><i>💻</i> Ноутбуки</a></li>
+                        <li><a href="#"><i>🖥️</i> Компьютеры</a></li>
+                        <li><a href="#"><i>🎧</i> Аксессуары</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Услуги</a>
+                    <ul class="submenu">
+                        <li><a href="#"><i>🔧</i> Ремонт</a></li>
+                        <li><a href="#"><i>🛠️</i> Обслуживание</a></li>
+                        <li><a href="#"><i>📡</i> Установка</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">О компании</a>
+                    <ul class="submenu">
+                        <li><a href="#"><i>🏢</i> О нас</a></li>
+                        <li><a href="#"><i>👥</i> Команда</a></li>
+                        <li><a href="#"><i>📜</i> История</a></li>
+                        <li><a href="#"><i>📍</i> Контакты</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Блог</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h1>Демонстрация двухуровневого меню</h1>
+            <p>Это пример современного двухуровневого меню с плавными анимациями и адаптивным дизайном. Наведите курсор на пункты меню "Продукты", "Услуги" или "О компании", чтобы увидеть подменю.</p>
+            <p>На мобильных устройствах меню сворачивается в гамбургер-меню, а подменю раскрывается по клику.</p>
+            <p>Меню включает в себя:</p>
+            <ul>
+                <li>Плавные переходы и анимации</li>
+                <li>Адаптивный дизайн для всех устройств</li>
+                <li>Современный цветовой градиент</li>
+                <li>Иконки для пунктов подменю</li>
+                <li>Тени и эффекты наведения</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const menu = document.querySelector('.menu');
+
+            // Переключение мобильного меню
+            mobileMenuBtn.addEventListener('click', function() {
+                menu.classList.toggle('active');
+            });
+
+            // Закрытие меню при клике вне его области
+            document.addEventListener('click', function(e) {
+                if (!menu.contains(e.target) && e.target !== mobileMenuBtn) {
+                    menu.classList.remove('active');
+                }
+            });
+
+            // Для мобильных устройств - открытие подменю по клику
+            if (window.innerWidth <= 768) {
+                const menuItemsWithSubmenu = document.querySelectorAll('.menu > li:has(.submenu)');
+                
+                menuItemsWithSubmenu.forEach(item => {
+                    const link = item.querySelector('a:first-child');
+                    
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const submenu = item.querySelector('.submenu');
+                        
+                        // Закрываем все открытые подменю
+                        document.querySelectorAll('.submenu').forEach(sm => {
+                            if (sm !== submenu) sm.style.display = 'none';
+                        });
+                        
+                        // Переключаем текущее подменю
+                        if (submenu.style.display === 'block') {
+                            submenu.style.display = 'none';
+                        } else {
+                            submenu.style.display = 'block';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
